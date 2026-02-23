@@ -11,6 +11,11 @@ import jakarta.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.example.content_calender.model.Status;
+
+
 
 
 
@@ -41,6 +46,7 @@ public class ContentController {
         content.setDateCreated(LocalDateTime.now());
         content.setDateUpdated(LocalDateTime.now());
         return repository.save(content);
+
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -62,6 +68,29 @@ public class ContentController {
         }        
         repository.deleteById(id);
     }
+
+
+    @GetMapping("/filter/{keyword}")
+    public List<Content> findTitleByKeyword(@PathVariable String keyword) {
+
+        List<Content> results = repository.findByTitleContainingIgnoreCase(keyword);
+
+        if(results.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Content Not Found");
+        }
+        
+        return results;
+    }
+    
+    @GetMapping("/filter/status/{status}")
+    public List<Content> getMethodName(@PathVariable Status status) {
+        List<Content> results = repository.findByStatus(status);
+        if(results.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Content now found");
+        }
+        return results;
+    }
+    
     
     
 }

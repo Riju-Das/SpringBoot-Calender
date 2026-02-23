@@ -1,10 +1,17 @@
 package com.example.content_calender.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name="content")
+@Getter
+@Setter
+@NoArgsConstructor
 public class Content{
 
     @Id
@@ -31,73 +38,4 @@ public class Content{
     @Column(name="date_updated")
     LocalDateTime dateUpdated;
 
-
-    public Content(){}
-
-    public Content(Integer id, String title, String desc, Status status, Type contentType, LocalDateTime dateCreated, LocalDateTime dateUpdated ){
-        this.id = id;
-        this.title = title;
-        this.desc = desc;
-        this.status = status;
-        this.contentType = contentType;
-        this.dateCreated = dateCreated;
-        this.dateUpdated = dateUpdated;
-    }
-
-
-    public Integer getId(){
-        return id;
-    }
-
-    public void setId(Integer id){
-        this.id = id;
-    }
-
-    public String getTitle(){
-        return title;
-    }
-
-    public void setTitle(String title){
-        this.title = title;
-    }
-
-    public String getDesc(){
-        return desc;
-    }
-
-    public void setDesc(String desc){
-        this.desc = desc;
-    }
-
-    public Status getStatus(){
-        return status;
-    }
-
-    public void setStatus(Status status){
-        this.status = status;
-    }
-
-    public Type getContentType(){
-        return  contentType;
-    }
-
-    public void setContentType(Type contentType){
-        this.contentType = contentType;
-    }
-
-    public LocalDateTime getDateCreated(){
-        return dateCreated;
-    } 
-    
-    public void setDateCreated(LocalDateTime dateCreated){
-        this.dateCreated = dateCreated;
-    }
-
-    public LocalDateTime getDateUpdated(){
-        return dateUpdated;
-    }
-    
-    public void setDateUpdated(LocalDateTime dateUpdated){
-        this.dateUpdated = dateUpdated;
-    }
 }
